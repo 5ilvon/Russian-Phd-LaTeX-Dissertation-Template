@@ -112,43 +112,7 @@ F_{total} = F_1 + \frac{{F_2 - 1}}{G_1} + \frac{{F_3 - 1}}{G_1 G_2} + \frac{F_4 
 
 \begin{figure}[ht]
 	\centering
-	\begin{circuitikz}[american, scale=1, transform shape]
-		\ctikzset{tripoles/mos style/arrows}
-		\ctikzset{bipoles/thickness=2}
-		\ctikzset{tripoles/pmos style/emptycircle}
-		\def\killdepth#1{{\raisebox{0pt}[\height][0pt]{#1}}} \path (0,0) -- (2,0); % bounding box
-		\draw (0,0) node[nmos,rotate=-90](Q1){\rotatebox{90}{Q1}};
-		\draw (Q1.D) to [short, l=Out, -] ++(2,0) to[C, l2^=$C_h$ and 4 pF]
-		++(0,-1) node[ground](GND){};    ++(0,-1) node[ground](GND){};
-		
-		
-		\draw ++(-3,0) coordinate(in) node[left](vi1){$v_i=v_1$} [short, l=Input, o-] to (Q1.S);
-		\draw (in) ++(2,0) [short, *-] to ++(0,2) node[nmos, rotate=-90, anchor=D](Q2){\rotatebox{90}{Q2}};
-		\draw (Q2.G) [short, -] to (Q2.G -| Q1.G) [short,-] to (Q1.G);
-		\draw (Q2.S) node[nmos, rotate=-90, anchor=D](Q3){\rotatebox{90}{Q3}};
-		\draw (Q3.D) [short, *-] to [C] ++(0, 4) coordinate(temp);
-		\draw (temp) node[pmos, bulk, rotate=90, anchor=D, xscale=-1](Q4){\scalebox{1}[-1]{\rotatebox{90}{Q4}}};
-		\draw (Q4.S) [short, -, l_=VDD] to ++(-1,0) coordinate(VDD);
-		\draw (Q4.bulk) [short, -*] to (Q4.D);
-		\draw (Q4.D) node[pmos, bulk, rotate=90, anchor=S, xscale=1](Q5){\rotatebox{-90}{Q5}};
-		\draw (Q5.bulk) [short, -] to (Q5.S);
-		\draw (Q5.D) [short, -] to (Q5.D -| Q1.G) to (Q2.G -| Q1.G);
-		\node [circ] at (Q2.G -| Q1.G){};
-		\draw (Q5.D -| Q1.G) node[nmos, anchor=S, rotate=-90, xscale=-1](Q6){\scalebox{1}[-1]{\rotatebox{-90}{Q6}}};
-		\node [circ] at (Q5.D -| Q1.G){};
-		\draw (Q6.D) [short, l=GND, -] to ++(1,0) coordinate(GND);
-		\draw (Q4.G) [short, -] to (Q4.G -| Q6.S) to (Q6.S);
-		
-		\draw (Q3.G) [short, -, l_=clk] to (Q3.G -| VDD);
-		\draw (Q3.S) [short, -, l=GND] to ++(-1,0);
-		
-		\draw (Q5.G) [short, -] to (Q6.G);
-		\node [circ] at (Q6.G){};
-		\draw (Q6.G) [short,-,l=clk] to (Q6.G -| GND);
-		
-		%COOOOOORDS
-		%\path (temp) \coord(temp);
-	\end{circuitikz}
+	\input{Dissertation/images/tha.tikz}
 	
 	\caption{Схема устройства выборки-хранения}
 	\label{ct:bootstrapped_switch}
@@ -156,43 +120,7 @@ F_{total} = F_1 + \frac{{F_2 - 1}}{G_1} + \frac{{F_3 - 1}}{G_1 G_2} + \frac{F_4 
 
 \begin{figure}[ht]
 	\centering
-	\begin{circuitikz}[american, scale=1, transform shape]
-		\def\killdepth#1{{\raisebox{0pt}[\height][0pt]{#1}}} \path (0,0) -- (2,0); % bounding box
-		\ctikzset{transistors/arrow pos=end}
-		\ctikzset{transistors/scale=1.2}
-		
-		\draw (0, 0) node[npn, anchor=B](Q1){Q1};
-		\draw (Q1.B) [short, *-] to [C, capacitors/scale=0.8] ++(-2,0) [short, -o, l=RF Input] to ++(-1,0);
-		\draw (Q1.B) [short, -] to ++(0, 1) to [R=\(R_{feedback}\)] ++(0, 2) to [C=\(C_{feedback}\), capacitors/scale=0.8] ++(0, 2) coordinate(tmp) [short, -*] to (Q1.C |- tmp);
-		\draw (Q1.C |- tmp) to[R, l_=\(R1\)] ++(0, 3) node[vcc](VCC){\(V_{CC}=2.5 V\)};
-		\draw (Q1.C |- tmp) [short, -] to (Q1.C);
-		\draw (Q1.E) to[R] ++(0,-2) node[ground](GND){};
-		
-		\draw (Q1.C) ++(0,1) [short, *-] to [C, capacitors/scale=0.8] ++(2,0) coordinate(tmp);
-		\draw (tmp) node[npn, anchor=B](Q2){Q2};
-		\draw (Q2.E) to[R] ++(0,-2) node[ground](GND){};
-		\draw (Q2.E) [short, *-] to ++(1,0) coordinate(tmp);
-		\draw (tmp) to [C, capacitors/scale=0.8] ++(0,-2) node[ground](GND){};
-		\draw (Q2.C) node[npn, anchor=E](Q3){Q3};
-		\draw (Q3.C) to[R] ++(0,2) node[vcc](VCC){\(V_{CC}\)};
-		\draw (Q3.B) [short, -] to (Q3.B |- VCC) [short, -*] to (VCC);
-		
-		\draw (Q3.C) [short, *-] to [C, capacitors/scale=0.8] ++(2,0) coordinate(tmp);
-		\draw (tmp) node[npn, anchor=B](Q4){Q4};
-		\draw (Q4.C) to [R] ++(0,2) node[vcc](VCC){\(V_{CC}\)};
-		\draw (Q4.E) [short, -] to ++(0, -1) to ++(2,0) coordinate(tmp) to [R] ++(0,-2) node[ground](GND){};
-		\draw (tmp) [short, *-] to ++(2, 0) coordinate(tmp);
-		\draw (tmp) [short, -] to ++(0, 1) coordinate(tmp);
-		\draw (tmp) node[npn, anchor=E, xscale=-1](Q5){\scalebox{-1}[1]{Q5}};
-		\draw (Q5.C) to [R] ++(0,2) node[vcc](VCC){\(V_{CC}\)};
-		\draw (Q5.B) [short, -] to [C, capacitors/scale=0.8] ++(0,-2) node[ground](GND){};
-		
-		\draw (Q4.C) [short, *-o, l=\(v_{out-}\)] to ++(1.2,0);
-		\draw (Q5.C) [short, *-o, l_=\(v_{out+}\)] to ++(-1.2,0);
-		
-		%COOOOOORDS
-		\path (tmp) \coord(tmp);
-	\end{circuitikz}
+	\input{Dissertation/images/lna_balun.tikz}
 	
 	\caption{Схема электрическая принципиальная рассматриваемого МШУ}
 	\label{ct:lna_balun_wo_bias}
@@ -200,41 +128,7 @@ F_{total} = F_1 + \frac{{F_2 - 1}}{G_1} + \frac{{F_3 - 1}}{G_1 G_2} + \frac{F_4 
 
 \begin{figure}[ht]
 	\centering
-	\begin{circuitikz}[american, scale=0.8, transform shape]
-		\def\killdepth#1{{\raisebox{0pt}[\height][0pt]{#1}}} \path (0,0) -- (2,0); % bounding box
-		\ctikzset{transistors/arrow pos=end}
-		\ctikzset{transistors/scale=1.2}
-		
-		\draw (0,0) node[left]{\(v_{RF+}\)} [short, o-] to [C, capacitors/scale=0.8] ++(2,0) node[npn, anchor=B](Q1){Q1} coordinate(tmp);
-		\draw (Q1.C) [short, -] to ++(0, 4) node[vcc](VCC){\(V_{CC} = 2.5~V\)};
-		\draw (Q1.E) [short, -] to [R] ++(0,-2) node[npn, anchor=C](Q2){Q2} (Q2.E) node[ground](GND){} (Q2.B) [short, -] to (Q2.B |- Q2.C) to (Q2.C) node[circ]{};
-		\draw (Q1.E) [short, *-] to ++(2,0) node[npn, anchor=B](Q3){Q3};
-		\draw (Q3.E) [short, -] to ++(0,-1) to [R] ++(0,-2) node[ground](GND){};
-		\draw (Q3.C) [short, -] to ++(0,1) node[circ]{} to ++(-1,0) node[npn, anchor=E](Q4){Q4} to ++(2,0) node[npn, anchor=E, xscale=-1](Q5){\scalebox{-1}[1]{Q5}};
-		\draw (Q4.C) [short, -] to ++(0,1) to [R] ++(0,2) node[vcc](VCC){\(V_{CC}\)};
-		\draw (Q5.B) node[npn, anchor=B](Q6){Q6};
-		\draw (Q6.E) [short, -] to ++(1,0) node[circ]{} coordinate(tmp) to ++(0,-1) node[npn,anchor=C, xscale=-1](Q7){\scalebox{-1}[1]{Q7}};
-		\draw (tmp) [short, -] to ++(1, 0) node[npn, anchor=E, xscale=-1](Q8){\scalebox{-1}[1]{Q8}};
-		\draw (Q7.E) [short, -] to ++(0,-1) to [R] ++(0,-2) node[ground](GND){};
-		\draw (Q3.E) node[circ]{} [short, -] to [R] (Q7.E) node[circ]{};
-		\draw (Q3.E) ++(0,-1) coordinate(tmp) node[circ]{} [short, -] to [C] (tmp -| Q7.E) node[circ]{};
-		\draw (Q8.C) [short, -] to ++(0,1) to [R] ++(0,2) node[vcc](VCC){\(V_{CC}\)} coordinate(VCC);
-		
-		\draw (Q5.C) [short, -] to ++(1.2,1.2) coordinate(tmp) to (tmp -| Q8.C) node[circ]{};
-		\draw (Q6.C) [short, -] to ++(-1.2, 1.2) coordinate(tmp) to (tmp -| Q4.C) node[circ]{};
-		
-		\draw (Q5.B) node[circ]{} [short, -] to ++(0,-1) node[ocirc]{} ++(0, -0.3) node(a){\(v_{LO+}\)};
-		\draw (Q4.B) [short, -] to ++(0, -1) node[ocirc]{} ++(0, -0.3) node(a){\(v_{LO-}\)};
-		\draw (Q8.B) [short, -] to ++(0, -1) node[ocirc]{} ++(0, -0.3) node(a){\(v_{LO-}\)};
-		
-		\draw (Q7.B) [short, -] to ++(2, 0) node[circ]{} node[npn, anchor=E, xscale=-1](Q9){\scalebox{-1}[1]{Q9}};
-		\draw (Q9.E) [short, -] to [R] ++(0,-2) node[npn, anchor=C, xscale=-1](Q10){\scalebox{-1}[1]{Q10}} (Q10.E) node[ground]{} (Q10.B) [short, -] to (Q10.B |- Q10.C) to (Q10.C) node[circ]{};
-		\draw (Q9.C) [short, -] to ++(0, 4) node[vcc]{\(V_{CC}\)};
-		\draw (Q9.B) [short, -o] to [C, capacitors/scale=0.8] ++(2,0) node[right]{\(v_{RF-}\)};
-		
-		%COOOOOORDS
-		\path (tmp) \coord(tmp);
-	\end{circuitikz}
+	\input{Dissertation/images/mixer.tikz}
 	
 	\caption{Схема электрическая принципиальная сверхширокополосного смесителя}
 	\label{ct:mixer_1_18}
