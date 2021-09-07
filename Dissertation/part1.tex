@@ -29,6 +29,13 @@ F_{total} = F_1 + \frac{{F_2 - 1}}{G_1} + \frac{{F_3 - 1}}{G_1 G_2} + \frac{F_4 
 Из-за подобной связности какого-либо параметра с любым другим практически не существует универсальных способов и схем, позволяющих разработать усилитель удовлетворяющий всем требуемым характеристикам технического задания.
 
 \subsection{Источники возникновения шумов в полупроводниковых устройствах}
+В данном разделе рассмотрим источники возникновения шума в полевых и биполярных транзисторах, а также методы снижения их вклада в общую шумовую картину.
+
+\subsubsection{Температурный шум (Thermal Noise)}
+
+\subsubsection{Дробовый шум (Shot Noise)}
+
+\subsubsection{\(1/f\) Фликер шум (Flicker Noise)}
 
 \subsection{Принцип действия широкополосного малошумящего усилителя}
 
@@ -39,6 +46,8 @@ F_{total} = F_1 + \frac{{F_2 - 1}}{G_1} + \frac{{F_3 - 1}}{G_1 G_2} + \frac{F_4 
 \label{eq:gamma}
 \Gamma = {\Bigg| \frac{Z_{in} - R_S}{Z_{in} + R_S} \Bigg|}^2
 \end{equation}
+
+С целью оптимизации входной цепи МШУ по наименьшему вкладу в общий коэффициент шума, \(\Gamma\) может не согласововаться с выходным сопротивлением источника. Таким образом, выбор рабочей точки \(\Gamma_{opt}\) должен обеспечивать компромисс между вкладом в общую шумовую характеристику и согласованием по мощности.
 
 \subsection{Первый каскад МШУ}
 Так как основное влияние на шумовые характеристики оказывает первый каскад усиления, необходимо максимально снизить количество вносимых шумов цепями согласования, входным транзистором и т.п.
@@ -116,6 +125,30 @@ F_{total} = F_1 + \frac{{F_2 - 1}}{G_1} + \frac{{F_3 - 1}}{G_1 G_2} + \frac{F_4 
 
 \begin{figure}[ht]
 	\centering
+	\includegraphics[width=0.8\linewidth]{lna_gain_nf.pdf}
+	
+	\caption{Результаты моделирования коэффициент усиления и шума рассматриваемого МШУ}
+	\label{ct:lna_gain_nf}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\linewidth]{lna_s11_s22.pdf}
+	
+	\caption{Результаты моделирования возвратных потерь по входу и выходу рассматриваемого МШУ}
+	\label{ct:lna_s11_s22}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\linewidth]{phase_diff.pdf}
+	
+	\caption{Разница фаз между диффиренциальными компонентами на выходе рассматриваемого МШУ согласно результатам моделирования}
+	\label{ct:phase_diff}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
 	\input{Dissertation/images/mixer.tikz}
 	
 	\caption{Схема электрическая принципиальная сверхширокополосного смесителя}
@@ -134,6 +167,38 @@ F_{total} = F_1 + \frac{{F_2 - 1}}{G_1} + \frac{{F_3 - 1}}{G_1 G_2} + \frac{F_4 
 		%\path (tmp) \coord(tmp);
 	\end{circuitikz}
 	
-	\caption{Структурная схема тракта приемника МИЧ 1 - 1.8 ГГц и 1.8 - 3.3 ГГц}
+	\caption{Структурная схема тракта приемника МИЧ \numrange{1}{1.8} ГГц и \numrange{1.8}{3.3} ГГц}
 	\label{ct:struct_1_8_3_3}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig.pdf}
+	
+	\caption{Оценка частоты тракта \numrange{1}{1.8} ГГц и \numrange{1.8}{3.3} ГГц}
+	\label{ct:freq_estimate_1g_3g3}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\linewidth]{IFM_Struct.pdf}
+	
+	\caption{Структурная схема частотного дискриминатора диапазона \numrange{1}{1.8} ГГц и \numrange{1.8}{3.3}}
+	\label{ct:freq_estimate_1g_1g8}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\linewidth]{IFM_Struct2.pdf}
+	
+	\caption{Структурная схема частотного дискриминатора диапазона \numrange{3.3}{6.3} ГГц}
+	\label{ct:freq_estimate_3g3_6g3}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\linewidth]{IFM_Struct3.pdf}
+	
+	\caption{Структурная схема частотного дискриминатора диапазона \numrange{6.3}{12} ГГц}
+	\label{ct:freq_estimate_6g3_12g}
 \end{figure}

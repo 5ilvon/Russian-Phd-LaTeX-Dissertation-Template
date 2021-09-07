@@ -150,7 +150,15 @@
 
 В~русском наборе принято:
 \begin{itemize}
-    \item единицы измерения, знак процента отделять пробелами от~числа:
+    \item единицы измерения, знак процента отделять пробелами от~числа:\begin{circuitikz}[american, scale=1, transform shape]
+		\def\killdepth#1{{\raisebox{0pt}[\height][0pt]{#1}}} \path (0,0) -- (2,0); % bounding box
+		
+		\ctikzset{bipoles/amp/width=1.2}
+		\draw (0,0) to[amp,t=LNA,l_=$F{=}12\,$dB, o-] ++(4,0);
+		
+		%COOOOOORDS
+		%\path (tmp) \coord(tmp);
+	\end{circuitikz}
           10~кВт, 15~\% (согласно ГОСТ 8.417, раздел 8);
     \item \(\tg 20\text{\textdegree}\), но: 20~{\textdegree}C
           (согласно ГОСТ 8.417, раздел 8);
