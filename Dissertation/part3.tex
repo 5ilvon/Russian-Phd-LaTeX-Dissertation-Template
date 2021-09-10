@@ -1,0 +1,131 @@
+\chapter{Схемотехнический расчет СФ-блоков}
+
+\section{Устройство выборки-хранения}
+Определим мощность шумов квантования идеального АЦП с разрядностью \(N\) и размахом полной шкалы \(V_{FS}\)
+\[ {P_{q}}^2 = \frac{\Delta^2}{12}\]
+если \(\Delta = \dfrac{V_{FS}}{2^N}\), тогда \( {P_q}^2 = 223.52~\mathrm{pW} \).
+
+\section*{Технические требования к аналого-цифровому преобразователю}
+Характеристики приведены в Табл.~\ref{tab:Parameters}.
+\begin{table}[h]
+	\caption[Характеристики разрабатываемого АЦП]{Характеристики разрабатываемого АЦП}
+	\label{tab:Parameters}
+	\centering
+	\begin{tabular}{rrr}
+		\toprule
+		\textbf{Параметр}      & \textbf{Значение} & \textbf{Единица измерения}\\
+		\midrule
+		\(N\)                 &   14      & Бит\\
+		\(F_{clk}\)           &   250     & МГц\\
+		\(V_{FS}\)            &   1.2     & В\\
+		\(V_{CM_{in}}\)                   &   600     & мВ\\
+		\(FPBW\) (Full Power Bandwidth)   & 750 & МГц\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+УВХ построено на базе МОП ключа Q1 с цепью смещения напряжения затвора \(V_{gs1}\), позволяющей снизить нелинейность ключа, возникающую из-за неполного <<закрытия>> или <<открытия>> канала.
+
+\begin{figure}[ht]
+	\centering
+	\input{Dissertation/images/tha.tikz}
+	
+	\caption{Схема устройства выборки-хранения}
+	\label{ct:bootstrapped_switch}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\input{Dissertation/images/lna_balun.tikz}
+	
+	\caption{Схема электрическая принципиальная рассматриваемого МШУ}
+	\label{ct:lna_balun_wo_bias}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\linewidth]{lna_gain_nf.pdf}
+	
+	\caption{Результаты моделирования коэффициент усиления и шума рассматриваемого МШУ}
+	\label{ct:lna_gain_nf}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\linewidth]{lna_s11_s22.pdf}
+	
+	\caption{Результаты моделирования возвратных потерь по входу и выходу рассматриваемого МШУ}
+	\label{ct:lna_s11_s22}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\linewidth]{phase_diff.pdf}
+	
+	\caption{Разница фаз между диффиренциальными компонентами на выходе рассматриваемого МШУ согласно результатам моделирования}
+	\label{ct:phase_diff}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\input{Dissertation/images/mixer.tikz}
+	
+	\caption{Схема электрическая принципиальная сверхширокополосного смесителя}
+	\label{ct:mixer_1_18}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\begin{circuitikz}[american, scale=1, transform shape]
+		\def\killdepth#1{{\raisebox{0pt}[\height][0pt]{#1}}} \path (0,0) -- (2,0); % bounding box
+		
+		\ctikzset{bipoles/amp/width=1.2}
+		\draw (0,0) to[amp,t=LNA,l_=$F{=}12\,$dB, o-] ++(4,0);
+		
+		%COOOOOORDS
+		%\path (tmp) \coord(tmp);
+	\end{circuitikz}
+	
+	\caption{Структурная схема тракта приемника МИЧ \numrange{1}{1.8} ГГц и \numrange{1.8}{3.3} ГГц}
+	\label{ct:struct_1_8_3_3}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.7\linewidth]{fig.pdf}
+	
+	\caption{Оценка частоты тракта \numrange{1}{1.8} ГГц и \numrange{1.8}{3.3} ГГц}
+	\label{ct:freq_estimate_1g_3g3}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\linewidth]{IFM_Struct.pdf}
+	
+	\caption{Структурная схема частотного дискриминатора диапазона \numrange{1}{1.8} ГГц и \numrange{1.8}{3.3}}
+	\label{ct:freq_estimate_1g_1g8}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\linewidth]{IFM_Struct2.pdf}
+	
+	\caption{Структурная схема частотного дискриминатора диапазона \numrange{3.3}{6.3} ГГц}
+	\label{ct:freq_estimate_3g3_6g3}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\linewidth]{IFM_Struct3.pdf}
+	
+	\caption{Структурная схема частотного дискриминатора диапазона \numrange{6.3}{11.5} ГГц}
+	\label{ct:freq_estimate_6g3_12g}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\linewidth]{IFM_Struct4.pdf}
+	
+	\caption{Структурная схема частотного дискриминатора диапазона \numrange{11.5}{18} ГГц}
+	\label{ct:freq_estimate_11g5_18g}
+\end{figure}
