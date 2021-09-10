@@ -92,14 +92,6 @@
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.7\linewidth]{fig.pdf}
-	
-	\caption{Оценка частоты тракта \numrange{1}{1.8} ГГц и \numrange{1.8}{3.3} ГГц}
-	\label{ct:freq_estimate_1g_3g3}
-\end{figure}
-
-\begin{figure}[ht]
-	\centering
 	\includegraphics[width=0.6\linewidth]{IFM_Struct.pdf}
 	
 	\caption{Структурная схема частотного дискриминатора диапазона \numrange{1}{1.8} ГГц и \numrange{1.8}{3.3}}
@@ -129,3 +121,30 @@
 	\caption{Структурная схема частотного дискриминатора диапазона \numrange{11.5}{18} ГГц}
 	\label{ct:freq_estimate_11g5_18g}
 \end{figure}
+
+\begin{figure}[ht]
+    \centerfloat{
+        \hfill
+        \subcaptionbox{\label{fig:ifm_1g_3g3}}{%
+            \includegraphics[width=0.4\linewidth]{ifm_1g_3g3.pdf}}
+        \hfill
+        \subcaptionbox{\label{fig:ifm_3g3_6g3}}{%
+            \includegraphics[width=0.4\linewidth]{ifm_3g3_to_6g3_27C.pdf}}
+        \hfill
+    }
+
+	\centerfloat{
+        \hfill
+        \subcaptionbox[List-of-Figures entry]{\label{fig:ifm_6g3_11g5}}{%
+            \includegraphics[width=0.4\linewidth]{ifm_6g1_to_11g5_27C.pdf}}
+        \hfill
+        \subcaptionbox{\label{fig:ifm_11g5_18g}}{%
+            \includegraphics[width=0.4\linewidth]{ifm_11g5_to_18g_27C.pdf}}
+        \hfill
+    }
+    \legend{Подрисуночный текст, описывающий обозначения, например. Согласно
+        ГОСТ 2.105, пункт 4.3.1, располагается перед наименованием рисунка.}
+    \caption[Результаты моделирования каналов МИЧ диапазона {\numrange[]{1}{18}~ГГц}]{Оценка частоты по результатам компьютерного моделирования каналов {\numrange[]{1}{18}~ГГц}}\label{fig:estimations_1g_18g}
+\end{figure}
+
+\nomenclature{ВАЦ}{Векторный Анализатор Цепей}
