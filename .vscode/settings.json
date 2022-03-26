@@ -1,4 +1,5 @@
 {
 	"cortex-debug.armToolchainPath": "",
-	"cortex-debug.openocdPath": "/home/irish/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9\\OpenOCD\\bin\\openocd"
+	"cortex-debug.openocdPath": "/home/irish/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9\\OpenOCD\\bin\\openocd",
+	"editor.wordWrap": "on"
 }
