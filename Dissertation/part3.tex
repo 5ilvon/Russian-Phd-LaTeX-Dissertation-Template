@@ -28,7 +28,7 @@
 
 \begin{figure}[ht]
 	\centering
-	\input{Dissertation/images/tha.tikz}
+	\includegraphics{Dissertation/images/tha.tikz}
 	
 	\caption{Схема устройства выборки-хранения}
 	\label{ct:bootstrapped_switch}
@@ -36,7 +36,7 @@
 
 \begin{figure}[ht]
 	\centering
-	\input{Dissertation/images/lna_balun.tikz}
+	\includegraphics{Dissertation/images/lna_balun.tikz}
 	
 	\caption{Схема электрическая принципиальная рассматриваемого МШУ}
 	\label{ct:lna_balun_wo_bias}
@@ -44,15 +44,39 @@
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.8\linewidth]{lna_gain_nf.pdf}
+	\includegraphics{lna_gain_nf.pdf}
 	
-	\caption{Результаты моделирования коэффициент усиления и шума рассматриваемого МШУ}
+	\caption{Коэффициенты усиления и шума рассматриваемого МШУ согласно результатам моделирования}
 	\label{ct:lna_gain_nf}
 \end{figure}
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.8\linewidth]{lna_s11_s22.pdf}
+	\includegraphics[width=6in,	height=3in]{lna_gain_nf.tikz}
+	
+	\caption{Коэффициенты усиления и шума рассматриваемого МШУ согласно результатам моделирования}
+	\label{ct:lna_gain_tikz}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics{probe_phase.pdf}
+	
+	\caption{Коэффициенты усиления и шума рассматриваемого МШУ согласно результатам моделирования}
+	\label{ct:ps_phase}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics{probe_phase_error.pdf}
+	
+	\caption{Значение фазовой ошибки разработанного активного фазовращателя 1 - 2 ГГц}
+	\label{ct:ps_phase_error}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics{lna_s11_s22.pdf}
 	
 	\caption{Результаты моделирования возвратных потерь по входу и выходу рассматриваемого МШУ}
 	\label{ct:lna_s11_s22}
@@ -60,7 +84,7 @@
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.8\linewidth]{phase_diff.pdf}
+	\includegraphics{phase_diff.pdf}
 	
 	\caption{Разница фаз между диффиренциальными компонентами на выходе рассматриваемого МШУ согласно результатам моделирования}
 	\label{ct:phase_diff}
@@ -68,10 +92,18 @@
 
 \begin{figure}[ht]
 	\centering
-	\input{Dissertation/images/mixer.tikz}
+	\includegraphics{Dissertation/images/mixer.tikz}
 	
 	\caption{Схема электрическая принципиальная сверхширокополосного смесителя}
 	\label{ct:mixer_1_18}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\resizebox{\linewidth}{!}{\input{Dissertation/images/drawing.pdf_tex}}
+	
+	\caption{Схема структурная - tikz}
+	\label{ct:drawing}
 \end{figure}
 
 \begin{figure}[ht]
@@ -126,25 +158,23 @@
     \centerfloat{
         \hfill
         \subcaptionbox{\label{fig:ifm_1g_3g3}}{%
-            \includegraphics[width=0.4\linewidth]{ifm_1g_3g3.pdf}}
+            \includegraphics[width=0.45\linewidth]{ifm_1g_3g3.pdf}}
         \hfill
         \subcaptionbox{\label{fig:ifm_3g3_6g3}}{%
-            \includegraphics[width=0.4\linewidth]{ifm_3g3_to_6g3_27C.pdf}}
+            \includegraphics[width=0.45\linewidth]{ifm_3g3_to_6g3_27C.pdf}}
         \hfill
     }
-
 	\centerfloat{
         \hfill
-        \subcaptionbox[List-of-Figures entry]{\label{fig:ifm_6g3_11g5}}{%
-            \includegraphics[width=0.4\linewidth]{ifm_6g1_to_11g5_27C.pdf}}
+        \subcaptionbox{\label{fig:ifm_6g3_11g5}}{%
+            \includegraphics[width=0.45\linewidth]{ifm_6g1_to_11g5_27C.pdf}}
         \hfill
         \subcaptionbox{\label{fig:ifm_11g5_18g}}{%
-            \includegraphics[width=0.4\linewidth]{ifm_11g5_to_18g_27C.pdf}}
+            \includegraphics[width=0.45\linewidth]{ifm_11g5_to_18g_27C.pdf}}
         \hfill
     }
-    \legend{Подрисуночный текст, описывающий обозначения, например. Согласно
-        ГОСТ 2.105, пункт 4.3.1, располагается перед наименованием рисунка.}
+    \legend{а) \numrange[]{1}{3.3}~ГГц; б) \numrange[]{3.3}{6.3}~ГГц; в) \numrange[]{6.3}{11.5}~ГГц; г) \numrange[]{11.5}{18}~ГГц.}
     \caption[Результаты моделирования каналов МИЧ диапазона {\numrange[]{1}{18}~ГГц}]{Оценка частоты по результатам компьютерного моделирования каналов {\numrange[]{1}{18}~ГГц}}\label{fig:estimations_1g_18g}
 \end{figure}
 
-\nomenclature{ВАЦ}{Векторный Анализатор Цепей}
+\section{Выводы по разделу}
