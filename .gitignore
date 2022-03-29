@@ -276,3 +276,9 @@ TSWLatexianTemp*
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Makeindex log files
+*.lpz
+
+# xwatermark package
+*.xwm
