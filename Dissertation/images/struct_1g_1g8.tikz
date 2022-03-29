@@ -1,0 +1,11 @@
+\begin{circuitikz}[american, scale=1, transform shape]
+	\ctikzset{bipoles/thickness=2}
+	\ctikzset{bipoles/amp/width=1.2}
+	\def\killdepth#1{{\raisebox{0pt}[\height][0pt]{#1}}} \path (0,0) -- (2,0); % bounding box
+	\draw (0,0) [amp, t=LNA, o-] to ++(3,0) coordinate(tmp);
+	\draw (tmp) [vamp, t=VGA, -] to ++(3,0) coordinate(tmp);
+	\draw (tmp) [short, -] to ++(1,0) node[rectangle, anchor=w]{90\si[]{\degree}};
+	
+	%COOOOOORDS
+	%\path (temp) \coord(temp);
+\end{circuitikz}

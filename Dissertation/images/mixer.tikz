@@ -1,0 +1,35 @@
+\begin{circuitikz}[american, scale=1, transform shape]
+		\def\killdepth#1{{\raisebox{0pt}[\height][0pt]{#1}}} \path (0,0) -- (2,0); % bounding box
+		\ctikzset{transistors/arrow pos=end}
+		\ctikzset{transistors/scale=1}
+		
+		\draw (0,0) node[left]{\(v_{RF+}\)} [short, o-] to [C, capacitors/scale=0.8] ++(2,0) node[npn, anchor=B](Q1){Q1} coordinate(tmp);
+		\draw (Q1.C) [short, -] to ++(0, 4) node[vcc](VCC){\(V_{CC} = 2.5~V\)};
+		\draw (Q1.E) [short, -] to [R] ++(0,-2) node[npn, anchor=C](Q2){Q2} (Q2.E) node[ground](GND){} (Q2.B) [short, -] to (Q2.B |- Q2.C) to (Q2.C) node[circ]{};
+		\draw (Q1.E) [short, *-] to ++(2,0) node[npn, anchor=B](Q3){Q3};
+		\draw (Q3.E) [short, -] to ++(0,-1) to [R] ++(0,-2) node[ground](GND){};
+		\draw (Q3.C) [short, -] to ++(0,1) node[circ]{} to ++(-1,0) node[npn, anchor=E](Q4){Q4} to ++(2,0) node[npn, anchor=E, xscale=-1](Q5){\scalebox{-1}[1]{Q5}};
+		\draw (Q4.C) [short, -] to ++(0,1) to [R] ++(0,2) node[vcc](VCC){\(V_{CC}\)};
+		\draw (Q5.B) node[npn, anchor=B](Q6){Q6};
+		\draw (Q6.E) [short, -] to ++(1,0) node[circ]{} coordinate(tmp) to ++(0,-1) node[npn,anchor=C, xscale=-1](Q7){\scalebox{-1}[1]{Q7}};
+		\draw (tmp) [short, -] to ++(1, 0) node[npn, anchor=E, xscale=-1](Q8){\scalebox{-1}[1]{Q8}};
+		\draw (Q7.E) [short, -] to ++(0,-1) to [R] ++(0,-2) node[ground](GND){};
+		\draw (Q3.E) node[circ]{} [short, -] to [R] (Q7.E) node[circ]{};
+		\draw (Q3.E) ++(0,-1) coordinate(tmp) node[circ]{} [short, -] to [C] (tmp -| Q7.E) node[circ]{};
+		\draw (Q8.C) [short, -] to ++(0,1) to [R] ++(0,2) node[vcc](VCC){\(V_{CC}\)} coordinate(VCC);
+		
+		\draw (Q5.C) [short, -] to ++(1.2,1.2) coordinate(tmp) to (tmp -| Q8.C) node[circ]{};
+		\draw (Q6.C) [short, -] to ++(-1.2, 1.2) coordinate(tmp) to (tmp -| Q4.C) node[circ]{};
+		
+		\draw (Q5.B) node[circ]{} [short, -] to ++(0,-1) node[ocirc]{} ++(0, -0.3) node(a){\(v_{LO+}\)};
+		\draw (Q4.B) [short, -] to ++(0, -1) node[ocirc]{} ++(0, -0.3) node(a){\(v_{LO-}\)};
+		\draw (Q8.B) [short, -] to ++(0, -1) node[ocirc]{} ++(0, -0.3) node(a){\(v_{LO-}\)};
+		
+		\draw (Q7.B) [short, -] to ++(2, 0) node[circ]{} node[npn, anchor=E, xscale=-1](Q9){\scalebox{-1}[1]{Q9}};
+		\draw (Q9.E) [short, -] to [R] ++(0,-2) node[npn, anchor=C, xscale=-1](Q10){\scalebox{-1}[1]{Q10}} (Q10.E) node[ground]{} (Q10.B) [short, -] to (Q10.B |- Q10.C) to (Q10.C) node[circ]{};
+		\draw (Q9.C) [short, -] to ++(0, 4) node[vcc]{\(V_{CC}\)};
+		\draw (Q9.B) [short, -o] to [C, capacitors/scale=0.8] ++(2,0) node[right]{\(v_{RF-}\)};
+		
+		%COOOOOORDS
+		\path (tmp) \coord(tmp);
+	\end{circuitikz}

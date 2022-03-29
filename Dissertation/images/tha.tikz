@@ -1,0 +1,37 @@
+\begin{circuitikz}[american, scale=1, transform shape]
+	\ctikzset{tripoles/mos style/arrows}
+	\ctikzset{bipoles/thickness=2}
+	\ctikzset{tripoles/pmos style/emptycircle}
+	\def\killdepth#1{{\raisebox{0pt}[\height][0pt]{#1}}} \path (0,0) -- (2,0); % bounding box
+	\draw (0,0) node[nmos,rotate=-90](Q1){\rotatebox{90}{Q1}};
+	\draw (Q1.D) to [short, l=Out, -] ++(2,0) to[C, l2^=$C_h$ and 4 pF]
+	++(0,-1) node[ground](GND){};    ++(0,-1) node[ground](GND){};
+	
+	
+	\draw ++(-3,0) coordinate(in) node[left](vi1){$v_i=v_1$} [short, l=Input, o-] to (Q1.S);
+	\draw (in) ++(2,0) [short, *-] to ++(0,2) node[nmos, rotate=-90, anchor=D](Q2){\rotatebox{90}{Q2}};
+	\draw (Q2.G) [short, -] to (Q2.G -| Q1.G) [short,-] to (Q1.G);
+	\draw (Q2.S) node[nmos, rotate=-90, anchor=D](Q3){\rotatebox{90}{Q3}};
+	\draw (Q3.D) [short, *-] to [C] ++(0, 4) coordinate(temp);
+	\draw (temp) node[pmos, bulk, rotate=90, anchor=D, xscale=-1](Q4){\scalebox{1}[-1]{\rotatebox{90}{Q4}}};
+	\draw (Q4.S) [short, -, l_=VDD] to ++(-1,0) coordinate(VDD);
+	\draw (Q4.bulk) [short, -*] to (Q4.D);
+	\draw (Q4.D) node[pmos, bulk, rotate=90, anchor=S, xscale=1](Q5){\rotatebox{-90}{Q5}};
+	\draw (Q5.bulk) [short, -] to (Q5.S);
+	\draw (Q5.D) [short, -] to (Q5.D -| Q1.G) to (Q2.G -| Q1.G);
+	\node [circ] at (Q2.G -| Q1.G){};
+	\draw (Q5.D -| Q1.G) node[nmos, anchor=S, rotate=-90, xscale=-1](Q6){\scalebox{1}[-1]{\rotatebox{-90}{Q6}}};
+	\node [circ] at (Q5.D -| Q1.G){};
+	\draw (Q6.D) [short, l=GND, -] to ++(1,0) coordinate(GND);
+	\draw (Q4.G) [short, -] to (Q4.G -| Q6.S) to (Q6.S);
+	
+	\draw (Q3.G) [short, -, l_=clk] to (Q3.G -| VDD);
+	\draw (Q3.S) [short, -, l=GND] to ++(-1,0);
+	
+	\draw (Q5.G) [short, -] to (Q6.G);
+	\node [circ] at (Q6.G){};
+	\draw (Q6.G) [short,-,l=clk] to (Q6.G -| GND);
+	
+	%COOOOOORDS
+	%\path (temp) \coord(temp);
+\end{circuitikz}

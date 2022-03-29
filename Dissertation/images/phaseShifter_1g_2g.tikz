@@ -1,0 +1,42 @@
+\begin{circuitikz}[american, scale=1, transform shape]
+	\def\killdepth#1{{\raisebox{0pt}[\height][0pt]{#1}}} \path (0,0) -- (2,0); % bounding box
+	\ctikzset{transistors/arrow pos=end}
+	\ctikzset{transistors/scale=1}
+	\ctikzset{resistors/scale=0.8}
+	\ctikzset{capacitors/scale=0.8}
+	
+	\draw (0, 0) node[npn, anchor=B](Q1){Q1};
+	\draw (Q1.B) [short, -] to ++(-1,0) [short, *-] to [C] ++(-2,0) [short, -o, l=RF Input] to ++(-1,0);
+	\draw (Q1.B) [short, -] ++(-1,0) to ++(0, 1) to [R=\(R_{1}\)] ++(0, 2) node[vcc](VCC){};
+	\draw (Q1.B) [short, -] ++(-1,0) to ++(0, -1) to [R=\(R_{2}\)] ++(0,-2) node[ground](GND){};
+	\draw (Q1.C) [short, -] to ++(0, 2) coordinate(tmp) to[R, l_=\(R_3\)] ++(0, 2) node[vcc](VCC){\(V_{CC}=2.5 V\)};
+	\draw (Q1.E) [short, -] to [R, l=\(R_{E}\)] +(0,-2) node[ground](GND){};
+
+	\draw (tmp) node[circ](){} [short, -] to ++(1,0) coordinate(tmp) to [R] ++(2,0) to [short, -] ++(2,0) node[circ](){} to ++(1,0) node[circ](){} to [R] ++(0,-2) node[ground](){};
+	\draw (tmp) node[circ](){} [short, -] to ++(0,-1) to [R] ++(2,0) to [C] ++(2,0) to ++(0,1);
+	
+	%\draw (Q1.C) [short, *-] to [C] ++(2,0) coordinate(tmp);
+	%\draw (tmp) node[npn, anchor=B](Q2){Q2};
+	%\draw (Q2.E) to[R] ++(0,-2) node[ground](GND){};
+	%\draw (Q2.E) [short, *-] to ++(1,0) coordinate(tmp);
+	%\draw (tmp) to [C] ++(0,-2) node[ground](GND){};
+	%\draw (Q2.C) node[npn, anchor=E](Q3){Q3};
+	%\draw (Q3.C) to[R] ++(0,2) node[vcc](VCC){\(V_{CC}\)};
+	%\draw (Q3.B) [short, -] to (Q3.B |- VCC) [short, -*] to (VCC);
+	
+	%\draw (Q3.C) [short, *-] to [C] ++(2,0) coordinate(tmp);
+	%\draw (tmp) node[npn, anchor=B](Q4){Q4};
+	%\draw (Q4.C) to [R] ++(0,2) node[vcc](VCC){\(V_{CC}\)};
+	%\draw (Q4.E) [short, -] to ++(0, -1) to ++(2,0) coordinate(tmp) to [R] ++(0,-2) node[ground](GND){};
+	%\draw (tmp) [short, *-] to ++(2, 0) coordinate(tmp);
+	%\draw (tmp) [short, -] to ++(0, 1) coordinate(tmp);
+	%\draw (tmp) node[npn, anchor=E, xscale=-1](Q5){\scalebox{-1}[1]{Q5}};
+	%\draw (Q5.C) to [R] ++(0,2) node[vcc](VCC){\(V_{CC}\)};
+	%\draw (Q5.B) [short, -] to [C] ++(0,-2) node[ground](GND){};
+	
+	%\draw (Q4.C) [short, *-o, l=\(v_{out-}\)] to ++(1.2,0);
+	%\draw (Q5.C) [short, *-o, l_=\(v_{out+}\)] to ++(-1.2,0);
+	
+	%COOOOOORDS
+	%\path (tmp) \coord(tmp);
+\end{circuitikz}
