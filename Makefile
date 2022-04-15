@@ -57,7 +57,7 @@ USEDEV ?= # use development version
 # Makefile options
 MAKEFLAGS := -s
 .DEFAULT_GOAL := all
-.NOTPARALLEL:
+#.NOTPARALLEL:
 
 export DRAFTON
 export SHOWMARKUP
@@ -76,7 +76,8 @@ export TIKZFILE
 export USEDEV
 
 ##! компиляция всех файлов
-all: synopsis dissertation presentation
+all: synopsis dissertation
+#all: synopsis dissertation presentation
 
 define compile
 	latexmk -norc -r $(MKRC) $(LATEXMKFLAGS) $(BACKEND) -jobname=$(TARGET) $(SOURCE)
