@@ -139,8 +139,8 @@
 \IfFileExists{impnattypo.sty}{% проверка установленности пакета impnattypo
     \ifluatex
         \ifnumequal{\value{draft}}{1}{% Черновик
-            \usepackage[hyphenation, lastparline, nosingleletter, homeoarchy,
-            rivers, draft]{impnattypo}
+            %\usepackage[hyphenation, lastparline, nosingleletter, homeoarchy,
+            %rivers, draft]{impnattypo}
         }{% Чистовик
             \usepackage[hyphenation, lastparline, nosingleletter]{impnattypo}
         }
