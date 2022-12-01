@@ -42,11 +42,19 @@
 \usepackage{pgfplots}
 \usepgfplotslibrary{groupplots}
 \pgfplotsset{compat=newest}
+\usepackage{tikzscale}
 \pgfkeys{/pgf/number format/.cd,use comma,1000 sep={}}
 
 \usepackage{siunitx}
 \usepackage[european,cuteinductors]{circuitikz}
 
+\def\normalcoord(#1){coordinate(#1)}
+\def\showcoord(#1){coordinate(#1) node[circle, red, draw, inner sep=1pt,
+pin={[red, overlay, inner sep=0.5pt, font=\tiny, pin distance=0.1cm,
+pin edge={red, overlay}]45:#1}](){}}
+\let\coord=\normalcoord
+\let\coord=\showcoord
+
 \begin{document}
-\fbox{\input{Dissertation/images/phaseShifter_1g_2g.tikz}}
+	\fbox{\input{Dissertation/images/passive_equalizer.tikz}}
 \end{document}
